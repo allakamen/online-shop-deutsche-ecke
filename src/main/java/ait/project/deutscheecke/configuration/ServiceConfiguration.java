@@ -1,4 +1,4 @@
-package ait.progect.deutscheecke.configuration;
+package ait.project.deutscheecke.configuration;
 
 import org.modelmapper.ModelMapper;
 import org.modelmapper.convention.MatchingStrategies;

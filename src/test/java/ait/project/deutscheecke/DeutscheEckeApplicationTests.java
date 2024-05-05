@@ -1,4 +1,4 @@
-package ait.progect.deutscheecke;
+package ait.project.deutscheecke;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
