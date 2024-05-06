@@ -17,6 +17,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import java.util.stream.StreamSupport;
@@ -93,18 +94,26 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductDto findProductById(Long id) {
-        Product product = productRepository.findById(id).orElseThrow(EntityNotFoundException::new);
-        if (product != null) {
-            return modelMapper.map(product, ProductDto.class);
+        Optional<Product> productOptional = productRepository.findById(id);
+        if (productOptional.isPresent()) {
+            Product product = productOptional.get();
+            ProductDto productDto = modelMapper.map(product, ProductDto.class);
+            productDto.setCategoryId(product.getCategory().getId());
+            return productDto;
+        } else {
+            throw new EntityNotFoundException();
         }
-        return null;
     }
 
     @Override
     public Iterable<ProductDto> findByCategory(long categoryId) {
         Iterable<Product> products = productRepository.findProductsByCategoryId(categoryId);
         return StreamSupport.stream(products.spliterator(), false)
-                .map(product -> modelMapper.map(product, ProductDto.class))
+                .map(product -> {
+                    ProductDto productDto = modelMapper.map(product, ProductDto.class);
+                    productDto.setCategoryId(product.getCategory().getId());
+                    return productDto;
+                })
                 .collect(Collectors.toList());
     }
 
@@ -112,7 +121,11 @@ public class ProductServiceImpl implements ProductService {
     public Iterable<ProductDto> findByPriceRange(double minPrice, double maxPrice) {
         Iterable<Product> products = productRepository.findProductsByPriceBetween(minPrice, maxPrice);
         return StreamSupport.stream(products.spliterator(), false)
-                .map(product -> modelMapper.map(product, ProductDto.class))
+                .map(product -> {
+                    ProductDto productDto = modelMapper.map(product, ProductDto.class);
+                    productDto.setCategoryId(product.getCategory().getId());
+                    return productDto;
+                })
                 .collect(Collectors.toList());
     }
 
@@ -122,7 +135,11 @@ public class ProductServiceImpl implements ProductService {
         title = title.replaceAll("\\r\\n|\\r|\\n", "");
         Iterable<Product> products = productRepository.findProductsByTitleContainsIgnoreCase(title);
         return StreamSupport.stream(products.spliterator(), false)
-                .map(product -> modelMapper.map(product, ProductDto.class))
+                .map(product -> {
+                    ProductDto productDto = modelMapper.map(product, ProductDto.class);
+                    productDto.setCategoryId(product.getCategory().getId());
+                    return productDto;
+                })
                 .collect(Collectors.toList());
     }
 }
