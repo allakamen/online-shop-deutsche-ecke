@@ -1,18 +1,13 @@
 package ait.project.deutscheecke.users.dto;
 
-import lombok.*;
-
-import java.util.Set;
+import lombok.Getter;
 
 @Getter
-public class UserSignupDto {
-
+public class UserUpdateDto {
     String login;
-    String password;
     String firstName;
     String lastName;
     String email;
     String country;
-
 
 }
