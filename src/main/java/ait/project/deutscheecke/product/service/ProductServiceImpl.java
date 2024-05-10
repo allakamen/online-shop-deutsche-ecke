@@ -52,6 +52,8 @@ public class ProductServiceImpl implements ProductService {
         return modelMapper.map(product, ProductDto.class);
     }
 
+
+    //TODO repair return of category_id
     @Override
     public ProductDto increaseProductQuantity(Long productId, int quantityToAdd) {
         Product product = productRepository.findById(productId).orElseThrow(EntityNotFoundException::new);
@@ -61,6 +63,8 @@ public class ProductServiceImpl implements ProductService {
         return modelMapper.map(product, ProductDto.class);
     }
 
+
+    //TODO repair return of category_id
     @Override
     public ProductDto decreaseProductQuantity(Long productId, int quantityToSubtract) {
         Product product = productRepository.findById(productId).orElseThrow(EntityNotFoundException::new);

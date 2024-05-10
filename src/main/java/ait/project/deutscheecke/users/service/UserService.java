@@ -9,17 +9,17 @@ public interface UserService {
 
     UserDto signupUser(UserSignupDto userSignupDto);
 
-    UserDto findUserById(Integer id);
+    UserDto findUserById(Long id);
 
-    UserDto updateUser(Integer id, UserUpdateDto userUpdateDto);
+    UserDto updateUser(Long id, UserUpdateDto userUpdateDto);
 
-    UserDto deleteUser(Integer id);
+    UserDto deleteUser(Long id);
 
     Iterable<UserDto> findUsersByCountry(String country);
 
-    RolesDto changeRole(Integer id, String role, boolean isAddRole);
+    RolesDto changeRole(Long id, String role, boolean isAddRole);
 
-    void changePassword(Integer id, String newPassword);
+    void changePassword(Long id, String newPassword);
 
 
 }

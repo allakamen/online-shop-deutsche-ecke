@@ -1,9 +1,9 @@
 package ait.project.deutscheecke.users.model;
 
+import ait.project.deutscheecke.cart.model.Cart;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -19,7 +19,7 @@ public class User {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    Integer id;
+    Long id;
     @Setter
     String login;
     @Setter
@@ -35,6 +35,10 @@ public class User {
     @Enumerated(value = EnumType.STRING)
     @Setter
     Role role;
+
+    @Setter
+    @OneToOne(mappedBy = "users", cascade = CascadeType.ALL)
+    private Cart cart;
 
 
 }

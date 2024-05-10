@@ -11,7 +11,7 @@ import java.util.List;
 @Setter
 @EqualsAndHashCode(of = "id")
 @Entity
-@Table(name = "product")
+@Table(name = "products")
 public class Product {
     @Id
     private Long id;

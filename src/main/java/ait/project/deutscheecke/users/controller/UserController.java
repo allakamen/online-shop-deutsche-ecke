@@ -27,17 +27,17 @@ public class UserController {
     }
 
     @GetMapping("/user/{id}")
-    public UserDto findUserById(@PathVariable Integer id) {
+    public UserDto findUserById(@PathVariable Long id) {
         return userService.findUserById(id);
     }
 
     @PutMapping("/user/{id}")
-    public UserDto updateUser(@PathVariable Integer id, @RequestBody UserUpdateDto userUpdateDto) {
+    public UserDto updateUser(@PathVariable Long id, @RequestBody UserUpdateDto userUpdateDto) {
         return userService.updateUser(id, userUpdateDto);
     }
 
     @DeleteMapping("/user/{id}")
-    public UserDto deleteUser(@PathVariable Integer id) {
+    public UserDto deleteUser(@PathVariable Long id) {
         return userService.deleteUser(id);
     }
 
@@ -47,18 +47,18 @@ public class UserController {
     }
 
     @PutMapping("/user/{id}/role/{role}")
-    public RolesDto addRole(@PathVariable Integer id, @PathVariable String role) {
+    public RolesDto addRole(@PathVariable Long id, @PathVariable String role) {
         return userService.changeRole(id, role, true);
     }
 
     @DeleteMapping("/user/{id}/role/{role}")
-    public RolesDto deleteRole(@PathVariable Integer id, @PathVariable String role) {
+    public RolesDto deleteRole(@PathVariable Long id, @PathVariable String role) {
         return userService.changeRole(id, role, false);
     }
 
     @PutMapping("/password")
     //TODO: Authorization
-    public void changePassword(Integer id, @RequestHeader("X-Password") String newPassword) {
+    public void changePassword(Long id, @RequestHeader("X-Password") String newPassword) {
 
     }
 }
