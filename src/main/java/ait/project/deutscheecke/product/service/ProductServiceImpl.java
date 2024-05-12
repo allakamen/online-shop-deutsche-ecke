@@ -13,7 +13,6 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 
 
-
 import org.springframework.stereotype.Service;
 
 
@@ -53,18 +52,19 @@ public class ProductServiceImpl implements ProductService {
     }
 
 
-    //TODO repair return of category_id
     @Override
     public ProductDto increaseProductQuantity(Long productId, int quantityToAdd) {
         Product product = productRepository.findById(productId).orElseThrow(EntityNotFoundException::new);
         int currentQuantity = product.getQuantity();
         product.setQuantity(currentQuantity + quantityToAdd);
         productRepository.save(product);
-        return modelMapper.map(product, ProductDto.class);
+
+        ProductDto productDto = modelMapper.map(product, ProductDto.class);
+        productDto.setCategoryId(product.getCategory().getId());
+
+        return productDto;
     }
 
-
-    //TODO repair return of category_id
     @Override
     public ProductDto decreaseProductQuantity(Long productId, int quantityToSubtract) {
         Product product = productRepository.findById(productId).orElseThrow(EntityNotFoundException::new);
@@ -74,7 +74,9 @@ public class ProductServiceImpl implements ProductService {
         }
         product.setQuantity(currentQuantity - quantityToSubtract);
         productRepository.save(product);
-        return modelMapper.map(product, ProductDto.class);
+        ProductDto productDto = modelMapper.map(product, ProductDto.class);
+        productDto.setCategoryId(product.getCategory().getId());
+        return productDto;
     }
 
     @Transactional
