@@ -37,7 +37,7 @@ public class User {
     Role role;
 
     @Setter
-    @OneToOne(mappedBy = "users", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private Cart cart;
 
 
