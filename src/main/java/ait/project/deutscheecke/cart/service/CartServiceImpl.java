@@ -14,6 +14,7 @@ import ait.project.deutscheecke.users.dao.UserRepository;
 import ait.project.deutscheecke.users.model.User;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;

@@ -14,7 +14,7 @@ import java.util.List;
 @Setter
 @EqualsAndHashCode(of = "id")
 @Entity
-@Table(name = "carts")
+@Table(name = "cart")
 public class Cart {
     @Id
     private Long id;
@@ -24,7 +24,7 @@ public class Cart {
     @JoinColumn(name = "users_id")
     private User user;
 
-    @OneToMany(mappedBy = "carts", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL)
     private List<CartItem> items = new ArrayList<>();
 
 }

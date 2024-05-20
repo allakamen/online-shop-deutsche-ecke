@@ -1,6 +1,7 @@
 package ait.project.deutscheecke.cart.model;
 
 
+import ait.project.deutscheecke.order.model.Order;
 import ait.project.deutscheecke.product.model.Product;
 import jakarta.persistence.*;
 import lombok.*;
@@ -20,6 +21,7 @@ public class CartItem {
     @ManyToOne
     @JoinColumn(name = "products_id")
     private Product product;
+
 
     private int quantity;
 

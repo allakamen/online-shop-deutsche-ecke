@@ -10,6 +10,7 @@ import ait.project.deutscheecke.exceptions.PersonNotFoundException;
 import ait.project.deutscheecke.exceptions.UserExistsException;
 import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -36,14 +37,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDto findUserById(Integer id) {
+    public UserDto findUserById(Long id) {
         User user = userRepository.findById(id).orElseThrow(PersonNotFoundException::new);
         return modelMapper.map(user, UserDto.class);
     }
 
     @Transactional
     @Override
-    public UserDto updateUser(Integer id, UserUpdateDto userUpdateDto) {
+    public UserDto updateUser(Long id, UserUpdateDto userUpdateDto) {
         User user = userRepository.findById(id).orElseThrow(PersonNotFoundException::new);
         if (!userUpdateDto.getFirstName().isEmpty()) {
             user.setFirstName(userUpdateDto.getFirstName());
@@ -65,7 +66,7 @@ public class UserServiceImpl implements UserService {
 
     @Transactional
     @Override
-    public UserDto deleteUser(Integer id) {
+    public UserDto deleteUser(Long id) {
         User user = userRepository.findById(id).orElseThrow(PersonNotFoundException::new);
         userRepository.delete(user);
         return modelMapper.map(user, UserDto.class);
@@ -81,13 +82,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public RolesDto changeRole(Integer id, String role, boolean isAddRole) {
+    public RolesDto changeRole(Long id, String role, boolean isAddRole) {
         //TODO:
         return null;
     }
 
     @Override
-    public void changePassword(Integer id, String newPassword) {
+    public void changePassword(Long id, String newPassword) {
         //TODO: AAA
     }
 }

@@ -1,8 +1,11 @@
 package ait.project.deutscheecke.users.model;
 
 import ait.project.deutscheecke.cart.model.Cart;
+import ait.project.deutscheecke.order.model.Order;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.List;
 
 
 @AllArgsConstructor
@@ -37,8 +40,11 @@ public class User {
     Role role;
 
     @Setter
-    @OneToOne(mappedBy = "users", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL)
     private Cart cart;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Order> orders;
 
 
 }
