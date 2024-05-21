@@ -149,4 +149,52 @@ public class ProductServiceImpl implements ProductService {
                 })
                 .collect(Collectors.toList());
     }
+
+    @Override
+    public Iterable<ProductDto> findAllOrderByTitleAsc() {
+        Iterable<Product> products = productRepository.findAllOrderByTitleAsc();
+        return StreamSupport.stream(products.spliterator(), false)
+                .map(product -> {
+                    ProductDto productDto = modelMapper.map(product, ProductDto.class);
+                    productDto.setCategoryId(product.getCategory().getId());
+                    return productDto;
+                })
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public Iterable<ProductDto> findAllOrderByTitleDesc() {
+        Iterable<Product> products = productRepository.findAllOrderByTitleDesc();
+        return StreamSupport.stream(products.spliterator(), false)
+                .map(product -> {
+                    ProductDto productDto = modelMapper.map(product, ProductDto.class);
+                    productDto.setCategoryId(product.getCategory().getId());
+                    return productDto;
+                })
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public Iterable<ProductDto> findAllOrderByPriceAsc() {
+        Iterable<Product> products = productRepository.findAllOrderByPriceAsc();
+        return StreamSupport.stream(products.spliterator(), false)
+                .map(product -> {
+                    ProductDto productDto = modelMapper.map(product, ProductDto.class);
+                    productDto.setCategoryId(product.getCategory().getId());
+                    return productDto;
+                })
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public Iterable<ProductDto> findAllOrderByPriceDesc() {
+        Iterable<Product> products = productRepository.findAllOrderByPriceDesc();
+        return StreamSupport.stream(products.spliterator(), false)
+                .map(product -> {
+                    ProductDto productDto = modelMapper.map(product, ProductDto.class);
+                    productDto.setCategoryId(product.getCategory().getId());
+                    return productDto;
+                })
+                .collect(Collectors.toList());
+    }
 }

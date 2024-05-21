@@ -15,4 +15,9 @@ public interface ProductService {
     Iterable<ProductDto> findByCategory(long categoryId);
     Iterable<ProductDto> findByPriceRange(double minPrice, double maxPrice);
     Iterable<ProductDto> findByTitle(String title);
+
+    Iterable<ProductDto> findAllOrderByTitleAsc();
+    Iterable<ProductDto> findAllOrderByTitleDesc();
+    Iterable<ProductDto> findAllOrderByPriceAsc();
+    Iterable<ProductDto> findAllOrderByPriceDesc();
 }

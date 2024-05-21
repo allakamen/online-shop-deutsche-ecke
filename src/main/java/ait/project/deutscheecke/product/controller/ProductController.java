@@ -66,4 +66,18 @@ public class ProductController {
         return productService.decreaseProductQuantity(productId, quantity);
     }
 
+    @GetMapping("/products/search")
+    public Iterable<ProductDto> searchProducts(
+            @RequestParam(required = false, defaultValue = "title") String sortBy,
+            @RequestParam(required = false, defaultValue = "asc") String order) {
+
+        return switch (sortBy.toLowerCase()) {
+            case "title" ->
+                    order.equalsIgnoreCase("asc") ? productService.findAllOrderByTitleAsc() : productService.findAllOrderByTitleDesc();
+            case "price" ->
+                    order.equalsIgnoreCase("asc") ? productService.findAllOrderByPriceAsc() : productService.findAllOrderByPriceDesc();
+            default -> throw new IllegalArgumentException("Invalid sortBy parameter");
+        };
+    }
+
 }
